@@ -1,7 +1,9 @@
 package seongho.coreprinciple.Member;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seongho.coreprinciple.AppConfig;
 import seongho.coreprinciple.member.Grade;
 import seongho.coreprinciple.member.Member;
 import seongho.coreprinciple.member.MemberService;
@@ -9,7 +11,13 @@ import seongho.coreprinciple.member.MemberServiceImpl;
 
 public class MemberServiceTest {
 
-    MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
+
+    @BeforeEach
+    public void beforeEach(){                       //왜 테스트에서는 이렇게 하는지 생각
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     void join(){

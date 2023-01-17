@@ -11,14 +11,15 @@ import seongho.coreprinciple.order.Order;
 public class OrderApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "김성호", Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId, "A", 10000);
+        Order order = orderService.createOrder(memberId, "A", 30000);
 
         System.out.println("주문 = " + order);
     }
