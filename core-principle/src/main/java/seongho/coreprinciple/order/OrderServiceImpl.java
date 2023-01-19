@@ -1,5 +1,7 @@
 package seongho.coreprinciple.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import seongho.coreprinciple.discount.RateDiscountPolicy;
 import seongho.coreprinciple.order.Order;
 import seongho.coreprinciple.discount.DiscountPolicy;
@@ -8,6 +10,7 @@ import seongho.coreprinciple.member.Member;
 import seongho.coreprinciple.member.MemberRepository;
 import seongho.coreprinciple.member.MemoryMemberRepository;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -16,6 +19,7 @@ public class OrderServiceImpl implements OrderService{
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();     //DIP 위반. 그리고 정책을 변경하는 순간 OCP를 위반한다.
     private final DiscountPolicy discountPolicy;      //이렇게 구현하고 인터페이스에만 의존한다.
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
