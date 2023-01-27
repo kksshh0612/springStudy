@@ -11,7 +11,7 @@ import seongho.coreprinciple.member.MemberRepository;
 import seongho.coreprinciple.member.MemoryMemberRepository;
 
 @Component
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService{      //OrderServiceImpl 구현 클래스 입장에서는 어떤 구현 객체가 들어오는지 모른다.
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository;
@@ -20,9 +20,9 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy;      //이렇게 구현하고 인터페이스에만 의존한다.
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy rateDiscountPolicy) {     //생성자 주입. 어떤 구현 객체가 들어오는지 모른다.
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = rateDiscountPolicy;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
         Member member = memberRepository.findById(memberId);
         int discountPrice = discountPolicy.discount(member, itemPrice);
 
-        return new Order(memberId, itemName, itemPrice, discountPrice);
+        return new Order(memberId, itemName, itemPrice, discountPrice);     //주문 생성
     }
 
     //싱글톤 테스트용

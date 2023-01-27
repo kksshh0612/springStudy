@@ -14,7 +14,7 @@ public class MemberServiceTest {
     MemberService memberService;
 
     @BeforeEach
-    public void beforeEach(){                       //왜 테스트에서는 이렇게 하는지 생각
+    public void beforeEach(){                       //왜 테스트에서는 이렇게 하는지 생각. 독립성 있느 테스트를 위해서. 이전에 저장된 객체의 영향을 받지 않게 하기 위함.
         AppConfig appConfig = new AppConfig();
         memberService = appConfig.memberService();
     }

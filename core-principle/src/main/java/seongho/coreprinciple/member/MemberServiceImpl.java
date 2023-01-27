@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class MemberServiceImpl implements MemberService{        //관례상 인터페이스의 구현체가 하나이면 인터페이스이름+Impl로 네이밍함.
 
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();     //실제 할당에서 구현체에 의존하는 문제 (DIP위반)
-    private MemberRepository memberRepository;      //DIP를 지켜줌.
+    private MemberRepository memberRepository;      //DIP를 지켜줌. 멤버 정보를 담을 객체
 
     @Autowired
     public  MemberServiceImpl(MemberRepository memberRepository){

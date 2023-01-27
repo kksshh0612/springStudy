@@ -2,6 +2,7 @@ package seongho.coreprinciple.discount;
 
 import seongho.coreprinciple.member.Member;
 
+// 할인 정책을 결정하는 인터페이스
 public interface DiscountPolicy {
 
     /**

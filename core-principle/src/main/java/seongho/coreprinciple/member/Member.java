@@ -1,11 +1,12 @@
 package seongho.coreprinciple.member;
 
+// 회원 엔티티.
 public class Member {
     private Long id;
     private String name;
     private Grade grade;
 
-    public Member(Long id, String name, Grade grade) {
+    public Member(Long id, String name, Grade grade) {      //생성자.
         this.id = id;
         this.name = name;
         this.grade = grade;

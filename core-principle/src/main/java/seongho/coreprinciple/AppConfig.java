@@ -13,7 +13,8 @@ import seongho.coreprinciple.order.OrderService;
 import seongho.coreprinciple.order.OrderServiceImpl;
 
 @Configuration
-public class AppConfig {
+public class AppConfig {        //이 컨트롤러에서 함수를 호출하면 생성자 주입을 실행한다. 모든 구현 객체를 주입하는 것은 여기서 처리한다.
+    //공연 기획자임. 역할과 구현을 모두 알아야함.
 
     @Bean
     public MemberService memberService(){
@@ -24,7 +25,7 @@ public class AppConfig {
     @Bean
     public MemberRepository memberRepository(){     //중복을 제거하고 역할이 보이도록 구현
         System.out.println("call AppConfig.memberRepository");
-        return new MemoryMemberRepository();
+        return new MemoryMemberRepository();                        //여기서 구현 클래스를 선택.
     }
 
     @Bean
@@ -34,7 +35,7 @@ public class AppConfig {
     }
 
     @Bean
-    public DiscountPolicy discountPolicy(){         //중복을 제거하고 역할이 보이도록 구현
+    public DiscountPolicy discountPolicy(){         //중복을 제거하고 역할이 보이도록 구현. 이제, 할인정책을 변경하고 싶으면 이 부분만 변경하면됨.
 //        return new FixDiscountPolicy();
         return new RateDiscountPolicy();
     }
@@ -54,27 +55,10 @@ public class AppConfig {
 //
 ////    리팩토링 전 (new MemoryMemberRepository()의 중복이 있고, 역할을 정확히 알 수 없다. 그리고 역할과 구현을 철저히 분리한다.)
 ////    public MemberService memberService() {
-////        return new MemberServiceImpl(new MemoryMemberRepository());
-////    }
-////    public OrderService orderService() {
-////        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
-////    }
-//
-//    public MemberService memberService(){
-//        return new MemberServiceImpl(memberRepository());     //생성자 주입
-//    }
-//
-//    public MemberRepository memberRepository(){     //중복을 제거하고 역할이 보이도록 구현
-//        return new MemoryMemberRepository();
-//    }
-//
-//    public OrderService orderService(){
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());
-//    }
-//
-//    public DiscountPolicy discountPolicy(){         //중복을 제거하고 역할이 보이도록 구현
-////        return new FixDiscountPolicy();
-//        return new RateDiscountPolicy();
-//    }
+//          return new MemberServiceImpl(new MemoryMemberRepository());
+//      }
+//      public OrderService orderService() {
+//          return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());     //MemoryMemberRepository()와 FixDiscountPolicy()를 분리시키기
+//      }
 //
 //}

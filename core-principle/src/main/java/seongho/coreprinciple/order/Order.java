@@ -1,6 +1,6 @@
 package seongho.coreprinciple.order;
 
-public class Order {
+public class Order {            //주문 그 자체에 대한 정보를 가진 클래스
     private Long memberId;
     private String itemName;
     private int itemPrice;

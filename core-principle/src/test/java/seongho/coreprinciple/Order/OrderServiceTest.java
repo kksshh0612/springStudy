@@ -20,8 +20,8 @@ public class OrderServiceTest {
     @BeforeEach
     public void beforeEach(){                       //왜 테스트에서는 이렇게 하는지 생각
         AppConfig appConfig = new AppConfig();
-        memberService = appConfig.memberService();
-        orderService = appConfig.orderService();
+        memberService = appConfig.memberService();      //멤버 레포지토리 지정.
+        orderService = appConfig.orderService();        //멤버 레포지토리와 할인 정책 지정
     }
 
     @Test
@@ -30,7 +30,7 @@ public class OrderServiceTest {
         Member member = new Member(memberId, "ㄱ밋어호", Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId, "A", 10000);
-        Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
+        Order order = orderService.createOrder(memberId, "A", 50000);       //order 만들어서 Order의 객체 반환
+        Assertions.assertThat(order.getDiscountPrice()).isEqualTo(5000);        //정률 할인정책 적용중
     }
 }
