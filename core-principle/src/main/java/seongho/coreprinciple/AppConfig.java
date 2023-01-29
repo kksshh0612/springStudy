@@ -16,6 +16,7 @@ import seongho.coreprinciple.order.OrderServiceImpl;
 public class AppConfig {        //이 컨트롤러에서 함수를 호출하면 생성자 주입을 실행한다. 모든 구현 객체를 주입하는 것은 여기서 처리한다.
     //공연 기획자임. 역할과 구현을 모두 알아야함.
 
+
     @Bean
     public MemberService memberService(){
         System.out.println("call AppConfig.memberService");
