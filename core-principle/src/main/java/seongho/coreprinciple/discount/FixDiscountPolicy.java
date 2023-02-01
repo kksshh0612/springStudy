@@ -1,8 +1,12 @@
 package seongho.coreprinciple.discount;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import seongho.coreprinciple.member.Grade;
 import seongho.coreprinciple.member.Member;
 
+@Component
+//@Qualifier("fixDiscountPolicy")
 public class FixDiscountPolicy implements DiscountPolicy{       //DiscountPolicy의 구현 클래스. 고정 할인 정책
 
     private int discountFixAmount = 1000;       //할인 금액
