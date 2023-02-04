@@ -27,11 +27,11 @@ public class OrderServiceImpl implements OrderService{      //OrderServiceImpl �
 //        this.discountPolicy = rateDiscountPolicy;
 //    }
 
-//    @Autowired            //@Qualifier 사용
-//    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {     //생성자 주입. 어떤 구현 객체가 들어오는지 모른다.
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
+    @Autowired            //@Qualifier 사용
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {     //생성자 주입. 어떤 구현 객체가 들어오는지 모른다.
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
 //    @Autowired            //애너테이션 만들기
 //    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {     //생성자 주입. 어떤 구현 객체가 들어오는지 모른다.
@@ -39,11 +39,11 @@ public class OrderServiceImpl implements OrderService{      //OrderServiceImpl �
 //        this.discountPolicy = discountPolicy;
 //    }
 
-    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {     //생성자 주입. 어떤 구현 객체가 들어오는지 모른다.
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    @Autowired
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {     //생성자 주입. 어떤 구현 객체가 들어오는지 모른다.
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
