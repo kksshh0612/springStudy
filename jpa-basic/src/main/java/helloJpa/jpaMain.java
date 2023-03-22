@@ -64,7 +64,7 @@ public class jpaMain {
             System.out.println("================");
 
             transaction.commit();
-        } catch (Exception e){
+        } catch (Exception e){          //문제 생기면 롤백
             transaction.rollback();
         } finally {
             em.close();
