@@ -40,6 +40,29 @@ public class jpaMain {
 //                System.out.println("멤버 이름 : " + member.getName());
 //            }
 
+            //쓰기지연 테스트
+//            Member member1 = new Member(3L, "a");
+//            Member member2 = new Member(4L, "b");
+//
+//            em.persist(member1);
+//            em.persist(member2);            //이 순간까지 쓰기지연 SQL 저장소에 저장된다.
+//
+//            System.out.println("============================");
+
+            //변경감지 테스트
+//            Member member = em.find(Member.class, 3L);
+//            member.setName("aaaaaaaaaaaaa");                //데이터 변경하면 DB 값 알아서 변경됨. 마치 자바 컬렉션을 다루듯이
+//
+//            System.out.println("============================");
+
+            //플러시 테스트
+            Member member = new Member(5L, "c");
+            em.persist(member);         //여기까지 하면 쿼리가 저장소에 담겨있고
+
+            em.flush();                 //플러시를 통해 쿼리를 디비에 먼저 반영할 수 있음. 플러시
+
+            System.out.println("================");
+
             transaction.commit();
         } catch (Exception e){
             transaction.rollback();
