@@ -56,8 +56,28 @@ public class jpaMain {
 //            System.out.println("============================");
 
             //플러시 테스트
-            Member member = new Member(5L, "c");
-            em.persist(member);         //여기까지 하면 쿼리가 저장소에 담겨있고
+//            Member member = new Member(5L, "c");
+//            em.persist(member);         //여기까지 하면 쿼리가 저장소에 담겨있고
+
+            //시퀀스 테스트
+            Member member1 = new Member();
+            member1.setUsername("A");
+
+            Member member2 = new Member();
+            member2.setUsername("B");
+
+            Member member3 = new Member();
+            member3.setUsername("C");
+
+            System.out.println("==================");
+
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(member3);
+
+            System.out.println("member1 = " + member1.getId());
+            System.out.println("member2 = " + member2.getId());
+            System.out.println("member3 = " + member3.getId());
 
             em.flush();                 //플러시를 통해 쿼리를 디비에 먼저 반영할 수 있음. 플러시
 
