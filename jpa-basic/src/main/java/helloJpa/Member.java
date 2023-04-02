@@ -65,7 +65,7 @@ public class Member {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(Team team) {        //관례상 setTeam보다는 changeTeam과 같이 일반적인 setter가 아님을 밝혀주는 것이 좋다.
         this.team = team;
         team.getMembers().add(this);
     }
