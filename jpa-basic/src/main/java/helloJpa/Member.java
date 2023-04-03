@@ -21,6 +21,10 @@ public class Member {
     @JoinColumn(name = "TEAM_ID")       //조인할 컬럼명
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
 
 //    @Column(name = "TEAM_ID")     //테이블에 맞춘 설계
 //    private Long teamId;
