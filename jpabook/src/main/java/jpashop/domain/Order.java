@@ -19,6 +19,10 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
     private LocalDateTime orderDate;
 
     @Enumerated(EnumType.STRING)            //enum타입에 대한 처리
