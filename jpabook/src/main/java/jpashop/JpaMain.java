@@ -5,7 +5,7 @@ import jpashop.domain.Member;
 import jpashop.domain.Order;
 import jpashop.domain.OrderItem;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 public class JpaMain {
     public static void main(String[] args) {

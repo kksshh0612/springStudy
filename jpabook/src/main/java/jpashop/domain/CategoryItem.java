@@ -1,6 +1,8 @@
 package jpashop.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+
+import jakarta.persistence.*;
 
 @Entity
 public class CategoryItem {
