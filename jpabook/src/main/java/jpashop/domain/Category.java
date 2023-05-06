@@ -1,7 +1,5 @@
 package jpashop.domain;
 
-import jakarta.persistence.Entity;
-
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ public class Category {
     @Column(name = "CATEGORY_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "id")
     List<Item> items = new ArrayList<>();
 
     private String name;

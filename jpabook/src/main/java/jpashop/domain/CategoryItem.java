@@ -1,7 +1,5 @@
 package jpashop.domain;
 
-import jakarta.persistence.Entity;
-
 import jakarta.persistence.*;
 
 @Entity

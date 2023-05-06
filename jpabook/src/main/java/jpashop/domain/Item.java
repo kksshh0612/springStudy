@@ -11,7 +11,7 @@ public class Item {
     @Column(name = "ITEM_ID")
     private Long id;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "id")
     private List<Category> categories = new ArrayList<>();
 
     private String name;
