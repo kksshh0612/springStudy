@@ -6,6 +6,7 @@ import jpashop.domain.Order;
 import jpashop.domain.OrderItem;
 
 import jakarta.persistence.*;
+import jpashop.domain.items.Book;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -17,24 +18,11 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = new Member();
-            member1.setName("member1");
+            Book book = new Book();
+            book.setName("jpa");
+            book.setAuthor("김영한");
 
-            Item item = new Item();
-            item.setName("item1");
-            item.setPrice(10000);
-
-            Order order = new Order();
-            order.addMember(member1);
-
-            OrderItem orderItem = new OrderItem();
-            orderItem.setItem(item);
-            orderItem.addOrder(order);
-
-            entityManager.persist(member1);
-            entityManager.persist(item);
-            entityManager.persist(order);
-            entityManager.persist(orderItem);
+            entityManager.persist(book);
 
 
 
