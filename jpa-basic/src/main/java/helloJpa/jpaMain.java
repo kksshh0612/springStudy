@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.hibernate.Hibernate;
+
 import java.awt.*;
 import java.security.spec.ECField;
 import java.time.LocalDateTime;
@@ -20,19 +22,27 @@ public class jpaMain {
 
         try{
 
-            Member member = new Member();
-            member.setUsername("user1");
-            member.setCreatedBy("kim");
-            member.setCreatedDate(LocalDateTime.now());
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            entityManager.persist(member);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            entityManager.persist(parent);
 
             entityManager.flush();
             entityManager.clear();
 
+            Parent findParent = entityManager.find(Parent.class, parent.getId());
+            findParent.getChildList().remove(0);        //첫번째 자식 지움
+
+//            Hibernate.initialize(refMember);        //프록시 강제 초기화
+
             transaction.commit();
         } catch (Exception e){
             transaction.rollback();
+            e.printStackTrace();
         } finally {
             entityManager.close();
         }

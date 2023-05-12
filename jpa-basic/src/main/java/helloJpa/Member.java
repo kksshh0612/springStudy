@@ -23,7 +23,7 @@ public class Member extends BaseEntity{
     @Column(name = "name")              //객체는 username, 디비는 name으로 쓰고싶을 때
     private String username;
 
-    @ManyToOne                  //객체지향 모델링
+    @ManyToOne(fetch = FetchType.LAZY)                  //객체지향 모델링
     @JoinColumn(name = "TEAM_ID")       //조인할 컬럼명
     private Team team;
 
@@ -52,6 +52,8 @@ public class Member extends BaseEntity{
         return team;
     }
 
+    //연관관계 편의 매서드
+    //위치는 두 연관관계 엔티티 중 핵심 비지니스에 편의 매서드를 넣는게 좋다.
     public void setTeam(Team team) {        //관례상 setTeam보다는 changeTeam과 같이 일반적인 setter가 아님을 밝혀주는 것이 좋다.
         this.team = team;
         team.getMembers().add(this);
