@@ -4,9 +4,7 @@ import jakarta.persistence.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 //@SequenceGenerator(
@@ -33,6 +31,19 @@ public class Member extends BaseEntity{
 
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
+
+    @Embedded Period workPeriod;
+
+    @Embedded Address homeAddress;
+
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
+    private List<Address> addressesHistory = new ArrayList<>();
 
     public Member(){}       //JPA를 사용할 때, 생성자를 만들면, 이렇게 기본 생성자를 꼭 만들어줘야 한다.
 

@@ -22,20 +22,7 @@ public class jpaMain {
 
         try{
 
-            Child child1 = new Child();
-            Child child2 = new Child();
 
-            Parent parent = new Parent();
-            parent.addChild(child1);
-            parent.addChild(child2);
-
-            entityManager.persist(parent);
-
-            entityManager.flush();
-            entityManager.clear();
-
-            Parent findParent = entityManager.find(Parent.class, parent.getId());
-            findParent.getChildList().remove(0);        //첫번째 자식 지움
 
 //            Hibernate.initialize(refMember);        //프록시 강제 초기화
 
