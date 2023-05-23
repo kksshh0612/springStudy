@@ -33,6 +33,8 @@ public class JpaMain {
             member.changeTeam(team);
             em.persist(member);
 
+            em.flush();
+            em.clear();
 
             //파라미터 있는 경우
 //            Member result = em.createQuery("select m from Member m where m.username = :uName", Member.class)
@@ -78,6 +80,18 @@ public class JpaMain {
 //                            .getResultList();
 //
 //            System.out.println(result.get(0));
+
+            //JPQL 기본 함수
+            String query = "select substring(m.username, 2, 4) from Member m";
+
+            List<String> result = em.createQuery(query, String.class)
+                            .getResultList();
+
+            for(String s : result){
+                System.out.println("잘린 문자열 : " + s);
+            }
+
+            //사용자 등록 함수는 필요하면 그때 공부해서 하기
 
             tx.commit();
         } catch (Exception e) {
