@@ -1,9 +1,6 @@
 package jpql;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -23,15 +20,32 @@ public class JpaMain {
 //                em.persist(member);
 //            }
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Team team1 = new Team();
+            team1.setName("teamA");
+            em.persist(team1);
 
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setAge(10);
-            member.changeTeam(team);
-            em.persist(member);
+            Team team2 = new Team();
+            team2.setName("teamB");
+            em.persist(team2);
+
+            Member member1 = new Member();
+            member1.setUsername("member1");
+            member1.setAge(10);
+            member1.changeTeam(team1);
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setAge(11);
+            member2.changeTeam(team2);
+
+            Member member3 = new Member();
+            member3.setUsername("member3");
+            member3.setAge(12);
+            member3.changeTeam(team2);
+
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(member3);
 
             em.flush();
             em.clear();
@@ -82,16 +96,80 @@ public class JpaMain {
 //            System.out.println(result.get(0));
 
             //JPQL 기본 함수
-            String query = "select substring(m.username, 2, 4) from Member m";
-
-            List<String> result = em.createQuery(query, String.class)
-                            .getResultList();
-
-            for(String s : result){
-                System.out.println("잘린 문자열 : " + s);
-            }
+//            String query = "select substring(m.username, 2, 4) from Member m";
+//
+//            List<String> result = em.createQuery(query, String.class)
+//                            .getResultList();
+//
+//            for(String s : result){
+//                System.out.println("잘린 문자열 : " + s);
+//            }
 
             //사용자 등록 함수는 필요하면 그때 공부해서 하기
+
+            //경로표현식
+//            String query = "select t.members from Team t";
+//
+//            List<Member> result = em.createQuery(query, Member.class)
+//                            .getResultList();
+//
+//            for(Member memberName : result){
+//                System.out.println(memberName);
+//            }
+
+            //페치 조인 (문제) -> N + 1문제 발생
+//            String query = "select m from Member m";
+//
+//            List<Member> members = em.createQuery(query, Member.class)
+//                    .getResultList();
+//
+//            for(Member member : members){
+//                System.out.println(member.getUsername() + ", " + member.getTeam().getName());
+//            }
+            //위 코드를 실행하면 팀이 2개 있기 때문에 쿼리가 멤버를 조회하는 쿼리 1개, 팀을 조회하는 쿼리 2개가 나가게 된다.
+            //만약 멤버가 1000명에 팀이 1000개가 있다면? 쿼리가 1000개 나가게 된다. ----> N + 1 문제 발생
+
+            //페치 조인 (해결)
+//            String query = "select m from Member m join fetch m.team";
+//
+//            List<Member> members = em.createQuery(query, Member.class)
+//                            .getResultList();
+//
+//            for(Member member : members){
+//                System.out.println(member.getUsername() + ", " + member.getTeam().getName());
+//            }
+
+            //컬렉션 페치 조인
+//            String query = "select t from Team t join fetch t.members where t.name = 'teamB'";
+//
+//            List<Team> result = em.createQuery(query, Team.class)
+//                            .getResultList();
+//
+//            for(Team team : result){
+//                System.out.println("team = " + team.getName() + " members = " + team.getMembers());
+//                for(Member member : team.getMembers()){
+//                    System.out.println(team + " ->  " + member);
+//                }
+//            }
+
+            //Named 쿼리
+//            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+//                            .setParameter("username", "member1")
+//                                    .getResultList();
+//
+//            for(Member member : resultList){
+//                System.out.println(member.getUsername());
+//            }
+
+            //벌크 연산
+            int resultCnt = em.createQuery("update Member m set m.age = 20")
+                            .executeUpdate();
+
+            em.clear();         //영속성 컨텍스트 초기화
+
+            Member member = em.find(Member.class, member1.getId());
+
+            System.out.println(member.getAge());
 
             tx.commit();
         } catch (Exception e) {
