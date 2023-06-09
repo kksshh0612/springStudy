@@ -28,8 +28,8 @@ public class Category {
     private String name;
 
     //== 연관관계 편의 매서드 ==//
-    public void addParentCategory(Category parent){
-        this.parent = parent;
-        parent.getChild().add(this);
+    public void addChildCategory(Category child){
+        this.child.add(child);
+        child.setParent(this);
     }
 }

@@ -1,9 +1,9 @@
 package springbootjpaprac.springbootjpaprac.domain;
 
+import springbootjpaprac.springbootjpaprac.domain.items.Item;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import springbootjpaprac.springbootjpaprac.domain.items.Item;
 
 @Entity
 @Getter @Setter
@@ -25,9 +25,26 @@ public class OrderItem {
 
     private int count;
 
-    //== 연관관계 편의 매서드 ==//
-    public void addOrder(Order order){
-        this.order = order;
-        order.getOrderItems().add(this);
+    //== 생성 매서드 ==//
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);        //해당 아이템의 재고 수량만큼 삭제
+
+        return orderItem;
+    }
+
+    ///== 비지니스 로직 ==//
+    /** 주문 취소 */
+    public void cancel(){
+        getItem().addStock(count);
+    }
+
+    /** 주문 상품 전체 가격 조회 */
+    public int getTotalPrice(){
+        return getOrderPrice() * getCount();
     }
 }
