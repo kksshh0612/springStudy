@@ -8,6 +8,7 @@ import springbootjpaprac.springbootjpaprac.domain.items.Item;
 import springbootjpaprac.springbootjpaprac.repository.ItemRepository;
 import springbootjpaprac.springbootjpaprac.repository.MemberRepository;
 import springbootjpaprac.springbootjpaprac.repository.OrderRepository;
+import springbootjpaprac.springbootjpaprac.repository.OrderSearch;
 
 import java.util.List;
 
@@ -60,7 +61,9 @@ public class OrderService {
     /**
      * 주문 검색
      */
-//    public List<Order> findOrders
+    public List<Order> findOrders(OrderSearch orderSearch){
+        return orderRepository.findAllByCriteria(orderSearch);
+    }
 
 
 }
