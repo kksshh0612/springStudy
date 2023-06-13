@@ -1,6 +1,7 @@
 package springbootjpaprac.springbootjpaprac.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
+//    @NotEmpty               //문제 있음. 화면(클라이언트) 밸리데이션을 위한 로직이 엔티티에 들어감.
     private String name;
 
     @Embedded
