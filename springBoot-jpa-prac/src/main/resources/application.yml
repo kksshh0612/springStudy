@@ -13,8 +13,10 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
+        default_batch_fetch_size: 100
 #        show_sql: true            # sout으로 sql 출력
         format_sql: true
+    open-in-view: false         # 기본 값 true OSIV 문제
 
 logging:
   level:

@@ -61,6 +61,19 @@ public class OrderRepository {
         return  resultList;
     }
 
+    //페이징
+    public List<Order> findAllWithMemberDelivery(int offset, int limit){
+        List<Order> resultList = entityManager.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+
+        return  resultList;
+    }
+
 //    public List<SimpleOrderQueryDto> findOrderDtos(){       //레포지토리에서 DTO로 조회 후 반환. 재사용성 떨어짐. 하지만 쿼리에서 select 다음 데이터를 별로 안가져와서 성능 쪼금 더 높음
 //        List<SimpleOrderQueryDto> resultList = entityManager.createQuery(
 //                "select new springbootjpaprac.springbootjpaprac.repository.SimpleOrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
@@ -71,4 +84,18 @@ public class OrderRepository {
 //
 //        return  resultList;
 //    }
+
+    public List<Order> findAllWithItem(){       //스프링 부트 3.x 이상부터는 조인할 때 distinct 기본으로 넣음.알아서 중복제거
+        List<Order> resultList = entityManager.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .setFirstResult(1)
+                .setMaxResults(100)
+                .getResultList();
+
+        return resultList;
+    }
 }

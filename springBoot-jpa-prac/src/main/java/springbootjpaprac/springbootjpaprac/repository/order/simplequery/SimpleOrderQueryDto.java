@@ -1,13 +1,14 @@
 package springbootjpaprac.springbootjpaprac.repository.order.simplequery;
 
 import lombok.Data;
+import lombok.Getter;
 import springbootjpaprac.springbootjpaprac.domain.Address;
 import springbootjpaprac.springbootjpaprac.domain.Order;
 import springbootjpaprac.springbootjpaprac.domain.OrderStatus;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 public class SimpleOrderQueryDto {
     private Long orderId;
     private String name;
