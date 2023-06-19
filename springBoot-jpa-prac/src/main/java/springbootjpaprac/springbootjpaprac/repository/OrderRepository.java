@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 import springbootjpaprac.springbootjpaprac.domain.Member;
 import springbootjpaprac.springbootjpaprac.domain.Order;
+import springbootjpaprac.springbootjpaprac.repository.order.simplequery.SimpleOrderQueryDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,4 +50,25 @@ public class OrderRepository {
         TypedQuery<Order> query = entityManager.createQuery(cq).setMaxResults(1000); //최대 100건
         return query.getResultList();
     }
+
+    public List<Order> findAllWithMemberDelivery(){
+        List<Order> resultList = entityManager.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
+
+        return  resultList;
+    }
+
+//    public List<SimpleOrderQueryDto> findOrderDtos(){       //레포지토리에서 DTO로 조회 후 반환. 재사용성 떨어짐. 하지만 쿼리에서 select 다음 데이터를 별로 안가져와서 성능 쪼금 더 높음
+//        List<SimpleOrderQueryDto> resultList = entityManager.createQuery(
+//                "select new springbootjpaprac.springbootjpaprac.repository.SimpleOrderQueryDto(o.id, m.name, o.orderDate, o.status, d.address)" +
+//                " from Order o" +
+//                        " join o.member m" +
+//                        " join o.delivery d", SimpleOrderQueryDto.class
+//        ).getResultList();
+//
+//        return  resultList;
+//    }
 }
