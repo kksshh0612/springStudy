@@ -12,7 +12,6 @@ import java.util.List;
 public class ItemRepository {
 
     private final EntityManager entityManager;
-
     public void save(Item item){
         if(item.getId() == null){
             entityManager.persist(item);
