@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)      //jpa 표준 스펙에 엔티티는 기본적으로 인자없는 생성자 있어야함.
 @ToString(of = {"id", "username", "age"})
 public class Member {
@@ -23,6 +23,11 @@ public class Member {
 
     public Member(String username) {
         this.username = username;
+    }
+
+    public Member(String usename, int age){
+        this.username = usename;
+        this.age = age;
     }
 
     public Member(String username, int age, Team team) {
